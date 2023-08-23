@@ -78,7 +78,7 @@ int main()
     unsigned nbUpper = 0;
     unsigned nbLower = 0;
 
-    for(unsigned i=2; i<v.size(); ++i)
+    for(unsigned i=2; i<v.size()-1; ++i)
     {
         sumAll += (v[i].position - v[i-1].position);
         nbAll++;
