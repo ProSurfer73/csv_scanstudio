@@ -99,9 +99,9 @@ int main()
 
     /// 4. Let's display the obtained results.
 
-    std::cout << "average all: " << (sumAll/nbAll) << std::endl;
-    std::cout << "average upper: " << (sumUpper/nbUpper) << std::endl;
-    std::cout << "average lower: " << (sumLower/nbLower) << std::endl;
+    std::cout << "average all: " << (sumAll/nbAll) << " (over " << nbAll << " curves)." << std::endl;
+    std::cout << "average upper: " << (sumUpper/nbUpper) << " (over " << nbUpper << " curves)." << std::endl;
+    std::cout << "average lower: " << (sumLower/nbLower) << " (over " << nbLower << " curves)." << std::endl;
 
 
 
