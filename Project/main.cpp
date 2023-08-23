@@ -103,7 +103,7 @@ int main()
     std::cout << "average upper: " << (sumUpper/nbUpper) << " (over " << nbUpper << " curves)." << std::endl;
     std::cout << "average lower: " << (sumLower/nbLower) << " (over " << nbLower << " curves)." << std::endl;
 
-
+    std::getline(std::cin, userInput);
 
     return 0;
 }
