@@ -55,6 +55,17 @@ int main()
                     thereIsProblem = true;
                 else
                     v.push_back(data);
+
+                while(ss >> c)
+                {
+                    if(c == ';')
+                    {
+                        std::cout << "ERROR: You are using multiple channels." << std::endl;
+                        std::cout << "Please export your csv file with only one channel." << std::endl;
+
+                        std::getline(std::cin, userInput);
+                    }
+                }
             }
         }
     }
