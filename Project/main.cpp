@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <cmath>
 
 int main()
 {
@@ -89,20 +90,44 @@ int main()
     unsigned nbUpper = 0;
     unsigned nbLower = 0;
 
+    double minAll = 1000;
+    double minUpper = 1000;
+    double minLower = 1000;
+
+    double maxUpper = -1;
+    double maxLower = -1;
+    double maxAll = -1;
+
     for(unsigned i=2; i<v.size()-1; ++i)
     {
-        sumAll += (v[i].position - v[i-1].position);
+        const double d = (v[i-1].position - v[i].position);
+        sumAll += d;
         nbAll++;
+
+        if(d < minAll)
+            minAll = d;
+        if(d > maxAll)
+            maxAll = d;
 
         if(v[i].value == 0)
         {
-            sumUpper += (v[i].position - v[i-1].position);
+            sumUpper += d;
             nbUpper++;
+
+            if(d < minUpper)
+                minUpper = d;
+            if(d > maxUpper)
+                maxUpper = d;
         }
         else if(v[i].value == 1)
         {
-            sumLower += (v[i].position - v[i-1].position);
+            sumLower += d;
             nbLower++;
+
+            if(d < minLower)
+                minLower = d;
+            if(d > maxLower)
+                maxLower = d;
         }
 
     }
@@ -114,7 +139,40 @@ int main()
     std::cout << "average upper: " << (sumUpper/nbUpper) << " (over " << nbUpper << " curves)." << std::endl;
     std::cout << "average lower: " << (sumLower/nbLower) << " (over " << nbLower << " curves)." << std::endl;
 
+    std::cout << "\nmin all: " << minAll << std::endl;
+    std::cout << "max all: " << maxAll << std::endl;
+    std::cout << "min upper: " << minUpper << std::endl;
+    std::cout << "max upper: " << maxUpper << std::endl;
+    std::cout << "min lower: " << minLower << std::endl;
+    std::cout << "max upper: " << maxUpper << std::endl;
+
+
+    // calculate the variance
+
+    double varSumUpper = 0;
+    double varSumLower = 0;
+    double varSumAll = 0;
+
+    for(unsigned i=2; i<v.size()-1; ++i)
+    {
+        varSumAll += pow(((v[i-1].position - v[i].position) - (sumAll/nbAll)),2);
+
+        if(v[i].value == 0)
+        {
+            varSumUpper += pow(((v[i-1].position - v[i].position) - (sumUpper/nbUpper)),2);
+        }
+        else if(v[i].value == 1)
+        {
+            varSumLower += pow(((v[i-1].position - v[i].position) - (sumLower/nbLower)),2);
+        }
+    }
+
+    std::cout << "variance all: " << (varSumAll/nbAll) << std::endl;
+    std::cout << "variance upper: " << (varSumUpper/nbUpper) << std::endl;
+    std::cout << "variance lower: " << (varSumLower/nbLower) << std::endl;
+
     std::getline(std::cin, userInput);
+
 
     return 0;
 }
